@@ -6,8 +6,7 @@ import pytest
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
-from pages import CartPage, LoginPage, ProductPage
-from ultis.data_reader import load_json_data
+from pages import CartPage, CheckoutPage, LoginPage, ProductPage
 
 _PROJECT_ROOT = Path(__file__).resolve().parent
 dotenv.load_dotenv(_PROJECT_ROOT / ".env", override=True)
@@ -22,7 +21,7 @@ _BROWSER_LAUNCHERS = {
 
 
 def _get_page_from_item(item):
-    for key in ("page", "open_login_page", "login_successfully", "product_page", "cart_page"):
+    for key in ("page", "open_login_page", "login_successfully", "product_page", "cart_page", "checkout_page"):
         fixture = item.funcargs.get(key)
         if fixture is None:
             continue
@@ -66,16 +65,6 @@ def login_successfully(open_login_page):
     yield open_login_page
 
 
-@pytest.fixture(scope="session")
-def login_data():
-    return load_json_data("login_data.json")
-
-
-@pytest.fixture(scope="session")
-def product_data():
-    return load_json_data("product_data.json")
-
-
 @pytest.fixture(scope="function")
 def product_page(login_successfully):
     return ProductPage(login_successfully.page)
@@ -84,6 +73,11 @@ def product_page(login_successfully):
 @pytest.fixture(scope="function")
 def cart_page(login_successfully):
     return CartPage(login_successfully.page)
+
+
+@pytest.fixture(scope="function")
+def checkout_page(login_successfully):
+    return CheckoutPage(login_successfully.page)
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)

@@ -42,3 +42,9 @@ export function getCsvScenario(scenario: string): Record<string, string> {
   if (!row) throw new Error(`CSV scenario not found: ${scenario}`);
   return row;
 }
+
+export function getCheckoutCustomer() {
+  return readJsonData<{ validCustomer: { firstName: string; lastName: string; postalCode: string } }>(
+    'checkout_data.json',
+  ).validCustomer;
+}

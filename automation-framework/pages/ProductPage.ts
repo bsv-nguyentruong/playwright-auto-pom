@@ -15,6 +15,12 @@ export class ProductPage extends BasePage {
     await expect(this.page.locator(ProductPageLocators.INVENTORY_LIST)).toBeVisible();
   }
 
+  async expectProductsNotEmpty(): Promise<void> {
+    const items = this.page.locator(ProductPageLocators.INVENTORY_ITEM);
+    await expect(items.first()).toBeVisible();
+    await expect(items).not.toHaveCount(0);
+  }
+
   async getProductCount(): Promise<number> {
     const items = this.page.locator(ProductPageLocators.INVENTORY_ITEM);
     await expect(items.first()).toBeVisible();

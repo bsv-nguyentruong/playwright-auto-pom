@@ -22,3 +22,14 @@ def get_login_scenario(scenario_name: str) -> dict:
 
 def get_product_name(product_key: str) -> str:
     return load_json_data("product_data.json")[product_key]["name"]
+
+
+def get_csv_scenario(scenario_name: str) -> dict:
+    for row in load_csv_data("users.csv"):
+        if row["scenario"] == scenario_name:
+            return row
+    raise KeyError(f"CSV scenario not found: {scenario_name}")
+
+
+def get_checkout_customer() -> dict:
+    return load_json_data("checkout_data.json")["valid_customer"]

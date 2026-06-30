@@ -14,6 +14,12 @@ class ProductPage(BasePage):
         self._expect_page_title(PRODUCTS_PAGE_TITLE)
         expect(self.page.locator(product_locators.INVENTORY_LIST)).to_be_visible()
 
+    @allure.step("Verify products are displayed")
+    def expect_products_not_empty(self):
+        items = self.page.locator(product_locators.INVENTORY_ITEM)
+        expect(items.first).to_be_visible()
+        expect(items).not_to_have_count(0)
+
     @allure.step("Get product count")
     def get_product_count(self) -> int:
         items = self.page.locator(product_locators.INVENTORY_ITEM)

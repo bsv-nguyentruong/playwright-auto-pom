@@ -4,6 +4,8 @@ import string
 
 from playwright.sync_api import Page, expect
 
+from pages.locators import CommonLocators as common_locators
+
 
 class BasePage:
     URL_INVENTORY = re.compile(r".*inventory\.html")
@@ -16,7 +18,7 @@ class BasePage:
         self.page = page
 
     def _expect_page_title(self, title: str):
-        expect(self.page.locator(".title")).to_have_text(title)
+        expect(self.page.locator(common_locators.PAGE_TITLE)).to_have_text(title)
 
 
 def generate_random_string(length: int = 8) -> str:

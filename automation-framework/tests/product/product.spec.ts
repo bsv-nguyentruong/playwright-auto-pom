@@ -1,12 +1,12 @@
 import { getUsersFromJson } from '../../utils/dataReader';
-import { expect, test } from '../fixtures';
+import { test } from '../fixtures';
 
 const { products } = getUsersFromJson();
 
 test.describe('Product Module', () => {
   test('PRODUCT_01: Hiển thị danh sách sản phẩm', async ({ productPage }) => {
     await productPage.expectProductsPageLoaded();
-    expect(await productPage.getProductCount()).toBeGreaterThan(0);
+    await productPage.expectProductsNotEmpty();
   });
 
   test('PRODUCT_02: Xem chi tiết sản phẩm', async ({ productPage }) => {

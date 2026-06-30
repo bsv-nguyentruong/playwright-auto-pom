@@ -1,6 +1,6 @@
 import allure
 
-from ultis.data_reader import get_login_scenario, load_csv_data
+from ultis.data_reader import get_csv_scenario, get_login_scenario
 from ultis.messages import ERROR_USERNAME_PASSWORD_MISMATCH, ERROR_USERNAME_REQUIRED
 
 
@@ -30,6 +30,6 @@ class TestLogin:
 
     @allure.title("LOGIN_05: Login scenario từ CSV")
     def test_login_from_csv(self, open_login_page):
-        row = next(item for item in load_csv_data("users.csv") if item["scenario"] == "valid_user")
+        row = get_csv_scenario("valid_user")
         open_login_page.login(row["username"], row["password"])
         open_login_page.expect_logged_in()
