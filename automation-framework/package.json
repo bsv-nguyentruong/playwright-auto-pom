@@ -1,0 +1,21 @@
+{
+  "name": "saucedemo-automation-framework",
+  "version": "1.0.0",
+  "description": "Playwright POM automation framework for saucedemo.com",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:login": "playwright test tests/login",
+    "test:product": "playwright test tests/product",
+    "test:cart": "playwright test tests/cart",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.0",
+    "typescript": "^5.8.0"
+  }
+}
